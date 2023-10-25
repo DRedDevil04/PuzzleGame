@@ -9,39 +9,15 @@ Made by -
 Welcome to the 9-Box Puzzle Game! This Java-based puzzle game provides a challenging and entertaining experience as you try to arrange the numbered tiles in the correct order within a 3x3 grid.
 
 ## Table of Contents
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
 - [How to Play](#how-to-play)
 - [Features](#features)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Getting Started
+## Prerequisites 
+   - The java program used to make the game can only run in a NetBeans environment.
 
-### Prerequisites
-Make sure you have the following installed on your machine:
-- Java Development Kit (JDK) 8 or later
-
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/9-box-puzzle.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd 9-box-puzzle
-   ```
-3. Compile the Java files:
-   ```bash
-   javac *.java
-   ```
-4. Run the game:
-   ```bash
-   java PuzzleGame
-   ```
-
-Certainly! Here are the rules for playing the 9-Box Puzzle Game:
+Here are the rules for playing the 9-Box Puzzle Game:
 
 ### Rules of the 9-Box Puzzle Game
 
@@ -90,6 +66,6 @@ If you'd like to contribute to the development of the 9-Box Puzzle Game, please 
 5. Submit a pull request.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
 
 Happy Puzzling! 🎮
