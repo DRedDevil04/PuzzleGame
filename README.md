@@ -9,7 +9,7 @@ Made by -
 Welcome to the 9-Box Puzzle Game! This Java-based puzzle game provides a challenging and entertaining experience as you try to arrange the numbered tiles in the correct order within a 3x3 grid.
 
 ## Table of Contents
-- [How to Play](#how-to-play)
+- [How to Play](#Rules-of-the-9-box-puzzle-game)
 - [Features](#features)
 - [Contributing](#contributing)
 - [License](#license)
