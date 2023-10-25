@@ -1,5 +1,9 @@
 # PuzzleGame
-OOM Project by Rishi, Nijval and Devam  (IIT2022013,IIT2022033,IIT2022035)
+OOM Project - 9 box puzzle
+Made by -
+1. Devam Desai (IIT2022035)
+2. Rishi Upadhyay (IIT2022013)
+3. Nijval Chaudhari (IIT2022033)
 # 9-Box Puzzle Game
 
 Welcome to the 9-Box Puzzle Game! This Java-based puzzle game provides a challenging and entertaining experience as you try to arrange the numbered tiles in the correct order within a 3x3 grid.
