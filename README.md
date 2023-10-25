@@ -1,5 +1,5 @@
 # PuzzleGame
-OOM Project - 9 box puzzle
+OOM Project - 9 box puzzle   
 Made by -
 1. Devam Desai (IIT2022035)
 2. Rishi Upadhyay (IIT2022013)
