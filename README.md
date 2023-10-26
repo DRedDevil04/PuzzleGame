@@ -69,3 +69,6 @@ If you'd like to contribute to the development of the 9-Box Puzzle Game, please 
 This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
 
 Happy Puzzling! 🎮
+
+
+## Note that the source code is available in the master branch
