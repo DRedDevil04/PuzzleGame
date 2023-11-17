@@ -31,25 +31,25 @@ import java.util.TimerTask;
  *
  * @author devam
  */
-class node {
-	String name;
-	int score1;
-
-	node(String name, int score1) {
-		this.name = name;
-		this.score1 = score1;
-	}
-}
-class sort1 implements Comparator<node> {
-	public int compare(node a, node b) {
-		if (a.score1 > b.score1)
-			return 1;
-		else if (a.score1 == b.score1) {
-			return a.name.compareTo(b.name);
-		}
-		return -1;
-	}
-}
+//class node {
+//	String name;
+//	int score1;
+//
+//	node(String name, int score1) {
+//		this.name = name;
+//		this.score1 = score1;
+//	}
+//}
+//class sort1 implements Comparator<node> {
+//	public int compare(node a, node b) {
+//		if (a.score1 > b.score1)
+//			return 1;
+//		else if (a.score1 == b.score1) {
+//			return a.name.compareTo(b.name);
+//		}
+//		return -1;
+//	}
+//}
 
 public class PuzzleGame extends javax.swing.JFrame {
 
