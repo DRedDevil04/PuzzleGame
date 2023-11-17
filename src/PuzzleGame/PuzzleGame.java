@@ -4,22 +4,151 @@
  */
 package PuzzleGame;
 
-import java.util.Random;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+import java.io.FileWriter;
+import java.nio.file.Path;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.util.Timer;
+import java.util.TimerTask;
+//import java.util.Random;
+//import javax.swing.JButton;
+//import javax.swing.JFrame;
+//import javax.swing.JOptionPane;
+//import java.util.ArrayList;
+//import javax.swing.JTable;
+//import javax.swing.JScrollPane;
+//import java.io.*;
+//import java.util.Scanner;
 /**
  *
  * @author devam
  */
+class node {
+	String name;
+	int score1;
+
+	node(String name, int score1) {
+		this.name = name;
+		this.score1 = score1;
+	}
+}
+class sort1 implements Comparator<node> {
+	public int compare(node a, node b) {
+		if (a.score1 > b.score1)
+			return 1;
+		else if (a.score1 == b.score1) {
+			return a.name.compareTo(b.name);
+		}
+		return -1;
+	}
+}
+
 public class PuzzleGame extends javax.swing.JFrame {
 
     /**
      * Creates new form PuzzleGame
      */
+   ArrayList<node> leaderboard = new ArrayList<node>();
+   String path_1;
+   String getCd = System.getProperty("user.dir");
+   
+//    public void newPane() {
+//		// playAudio();
+//		// String path_1=
+//		// "/home/ksuneet/Downloads/9-Box-Puzzle-Game/9-Box-Puzzle-Game/Source/database.txt";
+//		JFrame f;
+//		// Table
+//		JTable j;
+//		f = new JFrame();
+//
+//		// Frame Title
+//		f.setTitle("LeaderBoard");
+//		// Data to be displayed in the JTable
+//
+//		File ff1 = new File(path_1);
+//		leaderboard.clear();
+//		try {
+//			Scanner sc1 = new Scanner(ff1);
+//			while (true) {
+//				String temp = sc1.nextLine();
+//				if (temp.length() == 0 || temp.charAt(0) == '\n') {
+//					System.out.println("ArrayList Ended\n");
+//					break;
+//				}
+//				String[] t1 = temp.split(" ");
+//				System.out.println(temp);
+//				node obj = new node(t1[1], Integer.parseInt(t1[0]));
+//				leaderboard.add(obj);
+//			}
+//			// System.out.println("MMMMM\n");
+//		} catch (Exception E) {
+//			System.out.println("Exception!!!!");
+//		}
+//		String[][] data = new String[100][100];
+//		if (leaderboard == null) {
+//
+//		} else {
+//			Collections.sort(leaderboard, new sort1());
+//			// for(int i1=0;i1<leaderboard.size();i1++)
+//			// {
+//			// System.out.println("--->>>"+leaderboard.get(i1));
+//			// }
+//			int count = 0;
+//			for (int i1 = 0; i1 < leaderboard.size(); i1++) {
+//				// String[] total=leaderboard.get(i1).split(" ");
+//				int scoree = leaderboard.get(i1).score1;
+//				String name2 = leaderboard.get(i1).name;
+//				// data.add({name2,scoree});
+//				data[count][0] = name2;
+//				data[count][1] = Integer.toString(scoree);
+//				count++;
+//			}
+//		}
+//
+//		// Column Names
+//		String[] columnNames = { "UserName", "Score" };
+//
+//		// Initializing the JTable
+//		j = new JTable(data, columnNames);
+//		j.setBounds(30, 40, 200, 300);
+//
+//		// adding it to JScrollPane
+//		JScrollPane sp = new JScrollPane(j);
+//		f.add(sp);
+//		// Frame Size
+//		f.setSize(500, 200);
+//		// Frame Visible = true
+//		f.setVisible(true);
+//
+//	}
+    String name = JOptionPane.showInputDialog(null,
+				"RULES\nTo move:  If there is an empty adjacent square next to a tile, a tile may be slid into the empty location.\nTo win:  The tiles must be moved back into their original positions, numbered 1 through 8.\n\nEnter your name: ",
+				"9 Box-Puzzle", JOptionPane.QUESTION_MESSAGE);
     public PuzzleGame() {
         initComponents();
+        int flag1 = 0;
+		for (int i = 0; i < getCd.length() - 1; i++) {
+			if (getCd.substring(i, i + 1).equals("/")) {
+				flag1 = 1;
+				break;
+			}
+		}
+		if (flag1 == 0) {
+			getCd += "\\database.txt";
+		} else {
+			getCd += "/database.txt";
+		}
+		path_1 = getCd;
+		System.out.println(path_1);
+
     }
 
     /**
@@ -50,6 +179,7 @@ public class PuzzleGame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jblNumberOfMoves = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jbtnReset1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -70,8 +200,8 @@ public class PuzzleGame extends javax.swing.JFrame {
             }
         });
 
-        jbtnReset.setFont(new java.awt.Font("American Typewriter", 0, 50)); // NOI18N
-        jbtnReset.setText("Reset");
+        jbtnReset.setFont(new java.awt.Font("American Typewriter", 0, 36)); // NOI18N
+        jbtnReset.setText("New Game");
         jbtnReset.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 4));
         jbtnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,15 +404,25 @@ public class PuzzleGame extends javax.swing.JFrame {
         jLabel3.setText("Moves:");
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 4));
 
+        jbtnReset1.setFont(new java.awt.Font("American Typewriter", 0, 36)); // NOI18N
+        jbtnReset1.setText("LeaderBoard");
+        jbtnReset1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 4));
+        jbtnReset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReset1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jblNumberOfMoves, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbtnReset1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jblNumberOfMoves, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -292,7 +432,9 @@ public class PuzzleGame extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jblNumberOfMoves, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbtnReset1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 300, 650));
@@ -374,6 +516,15 @@ public class PuzzleGame extends javax.swing.JFrame {
          if(b1.indexOf('1')==0 && b2.indexOf('2')==0 && b3.indexOf('3')==0 && b4.indexOf('4')==0 && b5.indexOf('5')==0 && b6.indexOf('6')==0 && b7.indexOf('7')==0 && b8.indexOf('8')==0 ){
              JOptionPane.showMessageDialog(this, "YOU WIN THE GAME","PUZZLE GAME",
                      JOptionPane.INFORMATION_MESSAGE);
+             try {
+				String x = Integer.toString(Counter+1) + " " + name + "\n";
+				BufferedWriter out = new BufferedWriter(new FileWriter(path_1, true));
+				out.write(x);
+				out.close();
+			} catch (Exception e) {
+				// e.getMessage
+				System.out.println("Error");
+			}
          }
          Counter=Counter+1;
          jblNumberOfMoves.setText(Integer.toString(Counter));
@@ -466,9 +617,15 @@ public class PuzzleGame extends javax.swing.JFrame {
     
     private void jbtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnResetActionPerformed
         // TODO add your handling code here:
-        Shuffle();
-        Counter=-1;
-        SolutionChecker();
+//        Shuffle();
+//        Counter=-1;
+//        SolutionChecker();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PuzzleGame().setVisible(true);
+                setVisible(false);
+            }
+        });
     }//GEN-LAST:event_jbtnResetActionPerformed
 
     private void jbtnSolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSolutionActionPerformed
@@ -491,6 +648,15 @@ public class PuzzleGame extends javax.swing.JFrame {
         // TODO add your handling code here:
         Shuffle();
     }//GEN-LAST:event_formWindowActivated
+
+    private void jbtnReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReset1ActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LeaderBoard().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jbtnReset1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -522,7 +688,7 @@ public class PuzzleGame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PuzzleGame().setVisible(true);
+               new PuzzleGame().setVisible(true);
             }
         });
     }
@@ -542,6 +708,7 @@ public class PuzzleGame extends javax.swing.JFrame {
     private javax.swing.JLabel jblNumberOfMoves;
     private javax.swing.JButton jbtnExit;
     private javax.swing.JButton jbtnReset;
+    private javax.swing.JButton jbtnReset1;
     private javax.swing.JButton jbtnSolution;
     private javax.swing.JButton second;
     private javax.swing.JButton seventh;
