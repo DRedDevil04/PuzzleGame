@@ -95,7 +95,7 @@ public class LeaderBoard extends javax.swing.JFrame {
 				int scoree = board.get(i1).score1;
 				String name2 = board.get(i1).name;
 				// data.add({name2,scoree});
-                                Object[] objs = {scoree,name2};
+                                Object[] objs = {name2,scoree};
 				tableModel.addRow(objs);
                                 
 			}
