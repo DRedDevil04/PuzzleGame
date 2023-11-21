@@ -16,6 +16,8 @@ Welcome to the 9-Box Puzzle Game! This Java-based puzzle game provides a challen
 
 ## Prerequisites 
    - The java program used to make the game can only run in a NetBeans environment.
+   - You can download the JAR file in the main branch to run it directly.
+   - Code is available in the master branch
 
 Here are the rules for playing the 9-Box Puzzle Game:
 
